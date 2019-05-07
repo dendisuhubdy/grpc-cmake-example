@@ -24,23 +24,56 @@ protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_SRC_DIR} ${PROTOS})
 grpc_generate_cpp(GRPC_SRCS GRPC_HDRS ${PROTO_SRC_DIR} ${PROTOS})
 
 # Building server
-add_executable(greeter_server
-    ${CMAKE_CURRENT_SOURCE_DIR}/greeter_server.cc
+add_executable(greeter_sync_server
+    ${CMAKE_CURRENT_SOURCE_DIR}/greeter_sync_server.cc
     ${PROTO_SRCS}
     ${GRPC_SRCS}
 )
-target_link_libraries(greeter_server
+target_link_libraries(greeter_sync_server
     gRPC::grpc++_reflection
     protobuf::libprotobuf
 )
 
 # Building client
-add_executable(greeter_client
-    ${CMAKE_CURRENT_SOURCE_DIR}/greeter_client.cc
+add_executable(greeter_sync_client
+    ${CMAKE_CURRENT_SOURCE_DIR}/greeter_sync_client.cc
     ${PROTO_SRCS}
     ${GRPC_SRCS}
 )
-target_link_libraries(greeter_client
+target_link_libraries(greeter_sync_client
+    gRPC::grpc++_reflection
+    protobuf::libprotobuf
+)
+
+# Building server
+add_executable(greeter_async_server
+    ${CMAKE_CURRENT_SOURCE_DIR}/greeter_async_server.cc
+    ${PROTO_SRCS}
+    ${GRPC_SRCS}
+)
+target_link_libraries(greeter_async_server
+    gRPC::grpc++_reflection
+    protobuf::libprotobuf
+)
+
+# Building client
+add_executable(greeter_async_client
+    ${CMAKE_CURRENT_SOURCE_DIR}/greeter_async_client.cc
+    ${PROTO_SRCS}
+    ${GRPC_SRCS}
+)
+target_link_libraries(greeter_async_client
+    gRPC::grpc++_reflection
+    protobuf::libprotobuf
+)
+
+# Building client
+add_executable(greeter_async_client2
+    ${CMAKE_CURRENT_SOURCE_DIR}/greeter_async_client2.cc
+    ${PROTO_SRCS}
+    ${GRPC_SRCS}
+)
+target_link_libraries(greeter_async_client2
     gRPC::grpc++_reflection
     protobuf::libprotobuf
 )
